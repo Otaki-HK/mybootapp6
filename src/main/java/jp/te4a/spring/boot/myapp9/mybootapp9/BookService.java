@@ -2,6 +2,7 @@ package jp.te4a.spring.boot.myapp9.mybootapp9;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,8 @@ public class BookService {
    public BookForm findOne(Integer id) {
    bookRepository.findById(id);
    BookForm bookForm = new BookForm();
-   BeanUtils.copyProperties(bookRepository.findById(id), bookForm);
+   Optional<BookBean> opt = bookRepository.findById(id);
+   BeanUtils.copyProperties(opt.get(), bookForm);
    return bookForm;
    }
    
